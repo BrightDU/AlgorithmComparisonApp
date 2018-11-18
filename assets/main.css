@@ -1,0 +1,63 @@
+body {
+    background-color: whitesmoke;
+}
+
+#boxes,  #box1, #box2, #box3 {
+    height: 500px;
+    margin-left: 50px;
+}
+
+#box1, button {
+    background-color: skyblue;
+}
+
+#box1, #mybtn1:hover {
+    background-color: skyblue;
+}
+
+#box2, button {
+    background-color: orange;
+}
+
+#box2, #mybtn2:hover {
+    background-color: orange;
+}
+
+#box3, button{
+    background-color: greenyellow;
+}
+
+#box3, #mybtn3:hover {
+    background-color: greenyellow;
+}
+
+#box1, #box2, #box3, input, button, textarea {   
+    text-align: center;
+    width: 240px;
+}
+
+#mybtn1, #mybtn2, #mybtn3 {
+    color: black;
+}
+
+#mybtn1:hover, #mybtn2:hover, #mybtn3:hover {
+    color: white;
+}
+
+#sub {
+    margin-top: 40px;
+}
+
+#rt {
+    border-radius: 50%;
+    
+}
+
+
+
+@media screen and (max-width: 767px) {
+    #box1, #box2, #box3, input, button {   
+        text-align: center;
+        width: 180px;
+    }
+}

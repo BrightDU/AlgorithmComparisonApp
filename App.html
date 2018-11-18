@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CHAT'S ALOGORITHM COMPARISM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/Bstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/main.css" />
+    <script src="assets/jquery_3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+       
+           <center><h1>WELCOME TO PRNG COMPARISON APPLICATION</h1></center>
+                
+            <hr>
+            <div id="boxes">
+                <center>
+                    <div class="row">
+                        
+                        <div id="box1" class="col-md-3"> 
+                            <h2>NEW</h2>
+                            <hr>
+                            
+                            <div class="form-group">
+                                <textarea id="txt1" cols="26" rows="10" class="form-control"></textarea>
+                                <input  id="sed1" type="text" placeholder="ONE SEED" class="form-control">
+                                <button id="mybtn1" type="button" class="btn btn-outline-secondary">RUN</button>
+                                
+                            </div>
+                            <hr>
+                            
+                            <div id="sub">
+                                <input id="subp1"  type="text" placeholder="Period" class="form-control">
+                                <input id="subt1"  type="text" placeholder="Time(s)" class="form-control">
+                            </div>
+                        </div>
+                        <div id="box2" class="col-md-3">
+                            <h2>CMWC</h2>
+                            <hr>
+
+                            <div class="form-group">
+                                <textarea id="txt2" cols="26" rows="10" class="form-control"></textarea>
+                                <input id="sed2" type="text" placeholder="TWO SEEDS" class="form-control">
+                                <button id="mybtn2" type="button" class="btn btn-outline-secondary">RUN</button>
+                            </div>
+                            <hr>
+                           
+                            <div id="sub">
+                                <input id="subp2"  type="text" placeholder="Period" class="form-control">
+                                <input id="subt2" type="text" placeholder="Time(s)" class="form-control">
+                            </div>
+                        </div>
+                        <div id="box3" class="col-md-3">
+                            <h2>M. T.</h2>
+                            <hr>
+                            <div class="form-group">
+                                <textarea id="txt3" cols="26" rows="10" class="form-control"></textarea>
+                                <input id="sed3" type="text" placeholder="ONE SEED" class="form-control">
+                                <button id="mybtn3" type="button" class="btn btn-outline-secondary">RUN</button>
+                            </div>
+                            <hr>
+                            
+                            <div id="sub">
+                                <input id="subp3" type="text" placeholder="Period" class="form-control">
+                                <input id="subt3" type="text" placeholder="Time(s)" class="form-control">
+                            </div>
+                        </div>                
+                    </div> 
+                </center>          
+            </div>
+            <div id="footer" style="margin-top: 30px; color: black">
+                <center>
+                        Project By Chat Chinyio
+                </center>
+            </div>
+    </div>
+     <script type="text/javascript">
+            //Event Handler for NEW ALOGORITHM
+            $("#mybtn1").click(function() {
+               
+                //Retrives the seed from input
+                var seed = Number($("#sed1").val());
+                
+                var emptyField = "";
+
+                if($("#sed1").val() == "" || $("#sed1").val() > 20){
+                    alert("Please provide a seed value less than 20");
+                    emptyField = "true";
+                } else {
+                    emptyField = "false";
+ 
+                }
+               
+                var collect = new chat(seed);    
+                //get the id of the display region
+
+                var view1 = $("#txt1");
+      
+                //get time in seconds
+                var time = new Date();
+
+                //get the time in seconds and convert it to nano seconds for accuracy
+                var startTime = time.getUTCMilliseconds();
+                var nanoTime = 0.000000001 / startTime;    
+                
+     
+                for (var j = 0; j < 50; j++) {
+            
+                    //convert to the hundredth value
+                    var c_init_hth = Math.round(100 * collect())/100;
+                    var c_init_hthd = c_init_hth * 100;
+                    var parsei = parseInt(c_init_hthd);
+
+                    var timeSec = time.getSeconds();
+                   
+                    if(emptyField == "true") {
+                        view1.append();             
+                        //console.log(collect());
+                    } else if(emptyField == "false"){
+                        view1.append(parsei + "\n");             
+                        $('#subp1').val(`${233}`);
+                        $('#subt1').val(nanoTime + ' secs');
+                    }
+                    
+                }
+
+            });
+           
+            //=========================================================================
+            //Eventhandler for Mersenne Twister
+           $("#mybtn2").click(function() {
+            
+                //Retrives the seed from input
+                var ceeds = $("#sed2").val().split(',');
+                //console.log(ceeds);
+
+                var emptyField = "";
+
+                if($("#sed2").val() == "" || $("#sed2").val() > 20){
+                    alert("Please provide a seed value less than 20");
+                    emptyField = "true";
+                } else {
+                    emptyField = "false";
+                }
+               
+                //set the seeds
+                mwc.setSeed(ceeds);
+
+                //get the id of the display region
+                var view2 = $("#txt2");    
+                
+               
+                //get time in seconds
+                var time = new Date();
+
+                //get the time in seconds and convert it to nano seconds for accuracy
+                var startTime = time.getUTCMilliseconds();
+                var nanoTime = 0.000000001 / startTime;  
+                
+                for (var i = 0; i < 50; i++) {
+                
+                    //collect and convert the random number generated to nearest hundreth
+                    var mwc_hth = mwc.rand();
+                    //convert to the hundredth value
+                    var mwc_init_hth = Math.round(100 * mwc_hth)/100;
+                    var mwc_init_hthd = mwc_init_hth * 100;
+                    var mwc_parsei = parseInt(mwc_init_hthd);
+
+                    
+                    if(emptyField == "true") {
+                        view2.append('');             
+                        //console.log(mwc_parsei);
+                    } else if(emptyField == "false") {
+                        view2.append(mwc_parsei + "\n");             
+                        $('#subp2').val(`${2^60}`);
+                        $('#subt2').val(nanoTime + ' secs');
+                    }
+                   
+                }
+
+            });
+
+            //=========================================================================
+            //Eventhandler for Mersenne Twister
+           $("#mybtn3").click(function() {
+                 //Retrives the seed from input
+                 var ced = Number($("#sed3").val());
+
+                var emptyField = "";
+
+                if($("#sed3").val() == "" || $("#sed3").val() > 20){
+                    alert("Please provide a seed value less than 20");
+                    emptyField = "true";
+                } else {
+                    emptyField = "false";
+                }
+
+                //create a new instance of the object
+                var m = new MersenneTwister(ced);  
+                
+                //get the id of the display region
+                var view3 = $("#txt3");
+                
+                
+                //get time in seconds
+                var time = new Date();
+
+                //get the time in seconds and convert it to nano seconds for accuracy
+                var startTime = time.getUTCMilliseconds();
+                var nanoTime = 0.000000001 / startTime;  
+
+                for (var i = 0; i < 50; i++) {
+                   
+                     
+                    var m_init = m.next();
+                    
+                    var d = m_init/100000000;
+                    var m_d = Math.round(100 * d)/100;
+                    var m_d_c = Math.ceil(m_d);
+                   
+                   if(emptyField == "true") {
+                        view3.append('');             
+                        //console.log(mwc_parsei);
+                    } else if(emptyField == "false") {
+                        view3.append(m_d_c + "\n");            
+                        $('#subp3').val(`${2^127-1}`);
+                        $('#subt3').val(nanoTime + ' secs');
+                    }
+
+                }
+            });
+        </script>
+    <script src="chatChinyio_new.js"></script>
+    <script src="Mersenne_Twister.js"></script>
+    <script src="Complementary_MWC.js"></script>
+    <script src="/assets/Bstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
